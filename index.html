@@ -2,12 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 drawing data</title>
+        <title>D3 random data chart</title>
 	<script type="text/javascript" src="../d3/d3.js"></script>
 	<style type="text/css">
-	div.bar {
+	.bar {
 	    display: inline-block;
-	    width: 50px;
+	    width: 25px;
 	    height: 50px;   /* We'll override height later */
 	    background-color: teal;
 	    margin-right: 2px
@@ -17,8 +17,12 @@
     <body>
         <script type="text/javascript">
             // Your beautiful D3 code will go here
-	var dataset = [ 5, 10, 15, 20, 25 ];
-	
+//	var dataset = [ 5, 10, 15, 20, 25 ];
+	var dataset = []
+	for (i=0; i<10; i++)
+	{
+	dataset.push(Math.random());
+	}	
 	d3.select("body")
 	.selectAll("div")
 	.data(dataset)
@@ -26,7 +30,7 @@
 	.append("div")
 	.attr("class","bar")
 	.style("height",function(d)
-		{return((d*8)+"px");
+		{return(Math.ceil(d*10)+"px");
 		}
 		 )
 	.enter()
