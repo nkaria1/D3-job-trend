@@ -2,19 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 Page Template</title>
+        <title>D3 drawing data</title>
 	<script type="text/javascript" src="../d3/d3.js"></script>
+	<style type="text/css">
+	div.bar {
+	    display: inline-block;
+	    width: 50px;
+	    height: 50px;   /* We'll override height later */
+	    background-color: teal;
+	    margin-right: 2px
+		}
+	</style>
     </head>
     <body>
         <script type="text/javascript">
-var dataset;
-	d3.csv("skillchart.csv", function(error,s_table)
-		{
-		if (error){console.log(error);}
-		else {console.log(s_table);}
-
+            // Your beautiful D3 code will go here
+	var dataset = [ 5, 10, 15, 20, 25 ];
+	
+	d3.select("body")
+	.selectAll("div")
+	.data(dataset)
+	.enter()
+	.append("div")
+	.attr("class","bar")
+	.style("height",function(d)
+		{return((d*8)+"px");
 		}
-	     );
-	</script>
+		 )
+	.enter()
+	.append("p")
+	.text(" ");
+        </script>
     </body>
 </html>
