@@ -7,7 +7,26 @@
     </head>
     <body>
         <script type="text/javascript">
-	d3.select("body").append("p").text("New paragraph!");
-        </script>
+        var h=250;
+	var w=250;
+	var dataset = [ 5, 10, 15, 20, 25 ];
+	var svg=d3.select("body")
+		.append("svg")
+		.attr("height",h)
+		.attr("width",w);
+	var circles=svg.selectAll("circle")
+			.data(dataset)
+			.enter()
+			.append("circle");
+	circles.attr("cx", function(d,pos)
+                        {return((pos+1)*25);}
+			)
+		.attr("cy", h/2)
+		.attr("class", "round")
+		.attr("fill", function(d)
+			{return("rgba(225,0,225,"+d*0.01+")")}
+			);
+
+	</script>
     </body>
 </html>
