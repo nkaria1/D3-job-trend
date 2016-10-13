@@ -2,39 +2,40 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 random data chart</title>
+        <title>D3 drawing data</title>
 	<script type="text/javascript" src="../d3/d3.js"></script>
 	<style type="text/css">
-	.bar {
-	    display: inline-block;
-	    width: 25px;
-	    height: 50px;   /* We'll override height later */
-	    background-color: teal;
-	    margin-right: 2px
+	.rec{
+		width: 25px;
+		y: 10;
+		fill: brown;
 		}
 	</style>
     </head>
     <body>
         <script type="text/javascript">
-//	var dataset = [ 5, 10, 15, 20, 25 ];
-	var dataset = []
-	for (i=0; i<10; i++)
-	{
-	dataset.push(Math.random());
-	}	
-	d3.select("body")
-	.selectAll("div")
-	.data(dataset)
-	.enter()
-	.append("div")
-	.attr("class","bar")
-	.style("height",function(d)
-		{return(Math.ceil(d*10)+"px");
-		}
-		 )
-	.enter()
-	.append("p")
-	.text(" ");
+            // Your beautiful D3 code will go here
+	var h=250;
+	var w=250;
+	var dataset = [ 5, 10, 15, 20, 25 ];
+	var svg=d3.select("body")
+		.append("svg")
+		.attr("height",h)
+		.attr("width",w);
+	var rects=svg.selectAll("rect")
+			.data(dataset)
+			.enter()
+			.append("rect");
+	rects.attr("x", function(d,pos)
+                        {return(((pos+1)*25)+pos);}
+			)
+		.attr("class", "rec")
+	//	.attr("fill", function(d)
+	//		{return("rgba(225,0,225,"+d*0.01+")")}
+	//		);
+		.attr("height", function(d)
+			{return(d*5);}
+		);
         </script>
     </body>
 </html>
