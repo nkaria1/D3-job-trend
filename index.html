@@ -2,15 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 svg scaled scatter plot</title>
-	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+        <title>D3 svg scatter plot axes</title>
+	<script type="text/javascript" src="//d3js.org/d3.v3.min.js">
+	</script>
+	<style type="text/css">
+	.axis path,
+	.axis line{fill: none; stroke: black; shape-rendering: crispEdges;}
+	.axis text{font-famaily: sans-serif; font-size: 7px;}
+	</style>
     </head>
     <body>
         <script type="text/javascript">
             // Your beautiful D3 code will go here
 	var h=150;
-	var w=550;
-	var padding =15;
+	var w=570;
+	var padding =50;
 	var dataset =[
                 [5, 20,"python"], [480, 90,"R"], [250, 50,"java"], [100, 33,"unix"], [330, 95,"data mining"],
                 [410, 12, "cloud computing"], [475, 44, "Algorithm"], [25, 67, "tableau"], [85, 21,"weka"], [220, 88, "C++"]
@@ -19,16 +25,21 @@
  	var xScale = d3.scale.linear()
 			.domain([0, d3.max(dataset,function(d){return(d[0]);})])
 			.range([padding, w-padding]);
+	var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+	xAxis.ticks(5).tickFormat(d3.format("$"));
+	//other format speicifers for ticks
+	//https://github.com/d3/d3-format/blob/master/README.md#format
+	
 	var yScale = d3.scale.linear()
 			.domain([0, d3.max(dataset,function(d){return(d[1]);})])
-			.range([padding,h-padding]);
-	
+			.range([h-padding,padding]);
+	var yAxis = d3.svg.axis().scale(yScale).orient("left");
+	yAxis.ticks(4).tickFormat(d3.format("0.1%"));
 	var svg=d3.select("body")
 		.append("svg")
 		.attr({ height: h,
 			width: w
 			});
-
 
 	var circs=svg.selectAll("circle")
 	   .data(dataset)
@@ -37,7 +48,7 @@
 	   ;
 	var rScale= d3.scale.linear()
 			.domain([0,d3.max(dataset, function(d){return(d[1]);})])
-			.range([5,20]);
+			.range([1,5]);
 	var cir_attr={	
 		cx: function(d) { return xScale(d[0]); },
 		cy: function(d) { return yScale(d[1]); },
@@ -50,7 +61,7 @@
 	   .data(dataset)
 	   .enter()
 	   .append("text")
-	   .text(function(d){return (d[2]);})
+	   .text(function(d){return ("["+d[0]+","+d[1]+"]");})
 	   ;
      	
 	var lab_attr={	
@@ -59,7 +70,11 @@
 		};
 	labs.attr(lab_attr);
 
-
-	</script>
+	svg.append("g").attr("class","axis").attr("transform", "translate (0,"+(h-padding)+")").call(xAxis);
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(" + padding + ",0)")
+		.call(yAxis);
+</script>
     </body>
 </html>
