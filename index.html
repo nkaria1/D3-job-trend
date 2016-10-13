@@ -52,6 +52,7 @@
 		<option value="10">10</option>
 		<option value="5">5</option>
 	</select>	
+	<button type="button" class="button"> Capture </button>
 	</br></br>
 
 <script type="text/javascript">
@@ -85,17 +86,17 @@
 		//x: function(d) { return h - (d * 4); },
 		height: yScale.rangeBand(),
 		width: function(d) { return xScale(d); },
-		fill: function(d) { return "rgb(0, 0, " + (d * 10) + ")"; }
+		fill: "blue"
 	   };
 
 	rects.attr(rec_attr);
 	
+/* 
 	var texts=svg.selectAll("text")
 	   .data(dataset)
 	   .enter()
 	   .append("text")
 	   .text(function(d) {return d;});
- 
 	var text_attr={	
 		x: function(d) { return xScale(d)-20; },
 		y: function(d,i) { return yScale(i)+yScale.rangeBand()/2;},
@@ -105,16 +106,15 @@
 		fill: "pink" 
 	   };
 	texts.attr(text_attr);
-	
-	function echo(){
-		alert("You selected "+parseInt(document.getElementById("sel3").value)+" batches");
-		//update svg
-
-		} // end of echo function
+*/	
+	d3.select("button").on("click",function() { 
+			var anum=parseInt(document.getElementById("sel3").value);
+		//	alert("Hello "+anum);
+			dataset=[1*anum,2*anum,5*anum,anum,2*anum,1*anum,2*anum,anum,3*anum,anum]; //update
+			svg.selectAll("rect").data(dataset) //rebind	
+				.attr("width",function(d){return xScale(d);});  //re-draw 
+		});
        </script>
-
-	<button type="button" onclick="echo()" class="button"> Capture </button>
-
 
     </body>
 </html>
