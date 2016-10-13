@@ -2,21 +2,27 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 svg rect data</title>
+        <title>D3 svg scaled scatter plot</title>
 	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
     </head>
     <body>
         <script type="text/javascript">
             // Your beautiful D3 code will go here
-	var h=550;
+	var h=150;
 	var w=550;
-	var barPadding =1;
+	var padding =15;
 	var dataset =[
-                [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
-                [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]
+                [5, 20,"python"], [480, 90,"R"], [250, 50,"java"], [100, 33,"unix"], [330, 95,"data mining"],
+                [410, 12, "cloud computing"], [475, 44, "Algorithm"], [25, 67, "tableau"], [85, 21,"weka"], [220, 88, "C++"]
               ]; 
- 
-
+	
+ 	var xScale = d3.scale.linear()
+			.domain([0, d3.max(dataset,function(d){return(d[0]);})])
+			.range([padding, w-padding]);
+	var yScale = d3.scale.linear()
+			.domain([0, d3.max(dataset,function(d){return(d[1]);})])
+			.range([padding,h-padding]);
+	
 	var svg=d3.select("body")
 		.append("svg")
 		.attr({ height: h,
@@ -28,14 +34,32 @@
 	   .data(dataset)
 	   .enter()
 	   .append("circle")
-	   .attr({r : 5});
-
+	   ;
+	var rScale= d3.scale.linear()
+			.domain([0,d3.max(dataset, function(d){return(d[1]);})])
+			.range([5,20]);
 	var cir_attr={	
-		cx: function(d) { return d[0]; },
-		cy: function(d) { return d[1]; },
-		fill: "rgb(0, 90, 0 )" 
-	   };
+		cx: function(d) { return xScale(d[0]); },
+		cy: function(d) { return yScale(d[1]); },
+		fill: function(d) {return ("rgb(0,"+ d[0]+", 0 )"); },
+	   	r: function(d){return rScale(d[1]);} 
+		};
 	circs.attr(cir_attr);
-     	</script>
+	
+	var labs=svg.selectAll("text")
+	   .data(dataset)
+	   .enter()
+	   .append("text")
+	   .text(function(d){return (d[2]);})
+	   ;
+     	
+	var lab_attr={	
+		x: function(d) { return xScale(d[0]); },
+		y: function(d) { return yScale(d[1]); }
+		};
+	labs.attr(lab_attr);
+
+
+	</script>
     </body>
 </html>
