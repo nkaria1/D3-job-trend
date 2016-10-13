@@ -2,79 +2,53 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 svg scatter plot axes</title>
-	<script type="text/javascript" src="//d3js.org/d3.v3.min.js">
-	</script>
-	<style type="text/css">
-	.axis path,
-	.axis line{fill: none; stroke: black; shape-rendering: crispEdges;}
-	.axis text{font-famaily: sans-serif; font-size: 7px;}
-	</style>
+        <title>D3 svg rect data</title>
+	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
     </head>
     <body>
         <script type="text/javascript">
             // Your beautiful D3 code will go here
-	var h=150;
-	var w=570;
-	var padding =50;
-	var dataset =[
-                [5, 20,"python"], [480, 90,"R"], [250, 50,"java"], [100, 33,"unix"], [330, 95,"data mining"],
-                [410, 12, "cloud computing"], [475, 44, "Algorithm"], [25, 67, "tableau"], [85, 21,"weka"], [220, 88, "C++"]
-              ]; 
-	
- 	var xScale = d3.scale.linear()
-			.domain([0, d3.max(dataset,function(d){return(d[0]);})])
-			.range([padding, w-padding]);
-	var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-	xAxis.ticks(5).tickFormat(d3.format("$"));
-	//other format speicifers for ticks
-	//https://github.com/d3/d3-format/blob/master/README.md#format
-	
-	var yScale = d3.scale.linear()
-			.domain([0, d3.max(dataset,function(d){return(d[1]);})])
-			.range([h-padding,padding]);
-	var yAxis = d3.svg.axis().scale(yScale).orient("left");
-	yAxis.ticks(4).tickFormat(d3.format("0.1%"));
+	var h=250;
+	var w=250;
+	var barPadding =1;
+	var dataset = [ 5, 10, 15, 20, 25 ];
+
 	var svg=d3.select("body")
 		.append("svg")
 		.attr({ height: h,
 			width: w
 			});
 
-	var circs=svg.selectAll("circle")
+
+	var rects=svg.selectAll("rect")
 	   .data(dataset)
 	   .enter()
-	   .append("circle")
-	   ;
-	var rScale= d3.scale.linear()
-			.domain([0,d3.max(dataset, function(d){return(d[1]);})])
-			.range([1,5]);
-	var cir_attr={	
-		cx: function(d) { return xScale(d[0]); },
-		cy: function(d) { return yScale(d[1]); },
-		fill: function(d) {return ("rgb(0,"+ d[0]+", 0 )"); },
-	   	r: function(d){return rScale(d[1]);} 
-		};
-	circs.attr(cir_attr);
+	   .append("rect");
 	
-	var labs=svg.selectAll("text")
+	var rec_attr={	
+		x: function(d, i) { return i * (w / dataset.length); },
+		y: function(d) { return h - (d * 4); },
+		width: w / dataset.length - barPadding,
+		height: function(d) { return d * 4; },
+		fill: function(d) { return "rgb(0, 0, " + (d * 10) + ")"; }
+	   };
+
+	rects.attr(rec_attr);
+	
+	var texts=svg.selectAll("text")
 	   .data(dataset)
 	   .enter()
 	   .append("text")
-	   .text(function(d){return ("["+d[0]+","+d[1]+"]");})
-	   ;
-     	
-	var lab_attr={	
-		x: function(d) { return xScale(d[0]); },
-		y: function(d) { return yScale(d[1]); }
-		};
-	labs.attr(lab_attr);
-
-	svg.append("g").attr("class","axis").attr("transform", "translate (0,"+(h-padding)+")").call(xAxis);
-	svg.append("g")
-		.attr("class", "axis")
-		.attr("transform", "translate(" + padding + ",0)")
-		.call(yAxis);
-</script>
+	   .text(function(d) {return d;});
+ 
+	var text_attr={	
+		x: function(d, i) { return i * (w / dataset.length)+5; },
+		y: function(d) { return h - (d * 4)+15; },
+		width: w / dataset.length - barPadding,
+		height: function(d) { return d * 4; },
+		fill: "pink" 
+	   };
+	texts.attr(text_attr);
+       </script>
     </body>
 </html>
