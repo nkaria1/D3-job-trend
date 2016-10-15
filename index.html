@@ -2,40 +2,257 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 random data chart</title>
-	<script type="text/javascript" src="../d3/d3.js"></script>
-	<style type="text/css">
-	.bar {
-	    display: inline-block;
-	    width: 25px;
-	    height: 50px;   /* We'll override height later */
-	    background-color: teal;
-	    margin-right: 2px
-		}
-	</style>
+        <title>display</title>
+	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+
     </head>
     <body>
-        <script type="text/javascript">
-            // Your beautiful D3 code will go here
-//	var dataset = [ 5, 10, 15, 20, 25 ];
-	var dataset = []
-	for (i=0; i<10; i++)
-	{
-	dataset.push(Math.random());
-	}	
-	d3.select("body")
-	.selectAll("div")
-	.data(dataset)
-	.enter()
-	.append("div")
-	.attr("class","bar")
-	.style("height",function(d)
-		{return(Math.ceil(d*10)+"px");
-		}
-		 )
-	.enter()
-	.append("p")
-	.text(" ");
-        </script>
+	<h1>Job Trends</h1>
+
+	<select id="sel1" class="droplist">
+		<option value="0">State</option>
+		<option value="1">S1</option>
+		<option value="2">S2</option>
+		<option value="3">S3</option>
+		<option value="4">S4</option>
+		<option value="5">S5</option>
+	</select>	
+	<select id="sel2" class="droplist">
+		<option value="0">MSA</option>
+		<option value="500">Chicago</option>
+		<option value="500">Boston</option>
+		<option value="500">New York</option>
+	</select>	
+	<select id="sel3" onchange="dont_echo()" class="droplist">
+		<option value="0">Career Area</option>
+		<option value="20">Information Technology</option>
+		<option value="10">Health Care</option>
+		<option value="5">Arts</option>
+	</select>	
+	</br></br>
+
+<script type="text/javascript">
+	
+	function echo(){
+        alert("Hello "+document.getElementById("sel3").value);
+            }
+	function dont_echo(){}
+	// Your beautiful D3 code will go here
+
+	var h=400;
+	var w=400;
+	var padding=20;
+	var dataset=[0,1,2,3,4,5,6,7,9];
+/*	var dataset = [ 
+		[11,"marketing"],
+		[2,"finance"],
+		[9,"infrastructure"],
+		[5,"construction"], 
+		[10,"transport"], 
+		[15,"information technology"], 
+		[20,"arts"],
+		[9,"liturature"],
+		[22,"legal"], 
+		[25,"medical" ] 
+		];
+*/
+	var xScale = d3.scale.linear()
+                        .domain([0, d3.max(dataset,function(d){return(d);})])
+                        .range([padding, w-padding]);
+	var xWidthScale = d3.scale.linear()
+                        .domain([0, d3.max(dataset,function(d){return(d);})])
+                        .range([0, w-padding-padding]);
+
+	var xAxis = d3.svg.axis().scale(xScale)
+			.orient("bottom").ticks(5);
+	var yScale = d3.scale.ordinal()
+                .domain(d3.range(dataset.length))
+                .rangeRoundBands([ h-padding,padding], 0.1);
+	var yAxis = d3.svg.axis().scale(yScale)
+			.orient("left")
+		//	.tickFormat(function(d){return(d);})
+			;
+	
+	var svg=d3.select("body")
+		.append("svg")
+		.attr({ height: h,
+			width: w
+			});
+	svg.append("g").call(xAxis).attr("class","axis").attr("id", "xaxis").attr("transform", "translate(0,"+(h-padding)+")");
+	svg.append("g").call(yAxis).attr("class","axis").attr("id", "yaxis").attr("transform", "translate("+padding+",0)");
+	
+	var rects=svg.selectAll("rect")
+	   .data(dataset)
+	   .enter()
+	   .append("rect");
+
+
+	var rec_attr={	
+		y: function(d, i) { return yScale(i);},
+		x: padding +2,
+		height: yScale.rangeBand(),
+		width: function(d) { return xWidthScale(d); },
+		fill: "blue"
+	   };
+
+	rects.attr(rec_attr);
+	
+/* 
+	var texts=svg.selectAll("text")
+	   .data(dataset)
+	   .enter()
+	   .append("text")
+	   .text(function(d) {return d;});
+	var text_attr={	
+		x: function(d) { return xScale(d)-20; },
+		y: function(d,i) { return yScale(i)+yScale.rangeBand()/2;},
+	   	"text-anchor": "middle",
+		//width: w / dataset.length - barPadding,
+		//height: function(d) { return d * 4; },
+		fill: "pink" 
+	   };
+	texts.attr(text_attr);
+*/	
+
+
+//////////////////////////////////       Part 2       ////////////////////
+
+var diameter = 500, //max size of the bubbles
+    color    = d3.scale.category20c(); //color category
+
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([diameter, diameter])
+    .padding(1.5);
+
+var svg2 = d3.select("body")
+    .append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+    .attr("class", "bubble");
+
+d3.csv("fruit.csv", function(error, data){
+
+    //convert numerical values from strings to numbers
+    data = data.map(function(d){ d.value = +d["Amount"]; return d; });
+
+    //bubbles needs very specific format, convert data to this.
+    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
+
+    //setup the chart
+    var bubbles = svg2.append("g")
+        .attr("transform", "translate(0,0)")
+        .selectAll(".bubble")
+        .data(nodes)
+        .enter();
+
+    //create the bubbles
+    bubbles.append("circle")
+        .attr("r", function(d){ return d.r; })
+        .attr("cx", function(d){ return d.x; })
+        .attr("cy", function(d){ return d.y; })
+        .style("fill", function(d) { return color(d.value); });
+
+    //format the text for each bubble
+    bubbles.append("text")
+        .attr("x", function(d){ return d.x; })
+        .attr("y", function(d){ return d.y + 5; })
+        .attr("text-anchor", "middle")
+        .text(function(d){ return d["Fruit"]; })
+        .style({
+            "fill":"white", 
+            "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
+            "font-size": "12px"
+        });
+})       
+
+
+/////////////////////////      Update data      /////////////////////
+
+
+	d3.select("#sel3").on("change",function() { 
+		var newdata=[];
+		var anum=parseInt(document.getElementById("sel3").value);
+		var speed=parseInt(document.getElementById("sel2").value);
+	//	alert("Hello "+anum);
+		for (var i=0;i<9;i++){
+			newdata.push(Math.ceil(Math.random()*500));
+			}
+		//newdata=[anum,2*anum,5*anum,3*anum,anum,2*anum,2*anum,anum,3*anum,anum]; //update
+		var xScale = d3.scale.linear()
+		.domain([0, d3.max(newdata,function(d){return(d);})])
+		.range([padding, w-padding]);
+		var xWidthScale = d3.scale.linear()
+		.domain([0, d3.max(newdata,function(d){return(d);})])
+		.range([0, w-padding-padding]);
+		var yScale = d3.scale.ordinal()
+		.domain(d3.range(newdata.length))
+		.rangeRoundBands([ h-padding,padding], 0.2);
+
+		var bars = svg.selectAll("rect").data(newdata);
+		bars.enter()
+		    .append("rect")
+		    .attr({
+			x:padding,
+			y:h,
+			height:yScale.rangeBand(),
+			width: function(d){return xWidthScale(d);},
+			fill: "blue" 
+			});
+
+		    bars.transition().duration(speed) //rebind	
+			.attr({  
+				y: function(d, i) { return yScale(i);},
+				x: padding +2,
+				height: yScale.rangeBand(),
+				width: function(d) { return xWidthScale(d); },
+				fill: "blue"
+			});
+		
+		svg.select("#xaxis").transition().duration(speed);
+		svg.select("#yaxis").transition().duration(speed);
+
+		d3.csv("skills.csv", function(error, data){
+		    //convert numerical values from strings to numbers
+		    data = data.map(function(d){ d.value = +d["Amount"]; return d; });
+		    //bubbles needs very specific format, convert data to this.
+		    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
+
+		    //setup the chart 
+		    var bubbles = svg2.append("g")
+			.attr("transform", "translate(0,0)")
+			.selectAll(".bubble")
+			.data(nodes)
+			.transition();
+
+
+		    //create the bubbles
+		    bubbles.append("circle")
+			.attr("r", function(d){ return d.r; })
+			.attr("cx", function(d){ return d.x; })
+			.attr("cy", function(d){ return d.y; })
+			.style("fill", function(d) { return color(d.value); });
+
+		    //format the text for each bubble
+		    bubbles.append("text")
+			.attr("x", function(d){ return d.x; })
+			.attr("y", function(d){ return d.y + 5; })
+			.attr("text-anchor", "middle")
+			.text(function(d){ return d["Fruit"]; })
+			.style({
+			    "fill":"white",
+			    "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
+			    "font-size": "12px"
+			});
+		}) // end of csv function
+
+
+
+
+		}); // end of on change function
+
+</script>
+<input type="range" id="slider1" step="25">
     </body>
 </html>
+
