@@ -1,0 +1,58 @@
+body,html {
+	background-color: #3b4b54;
+	width: 100%;
+	height: 100%;
+	margin: 20 auto;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+h1 {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 2em;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin: 0 auto;
+  text-align: center;
+}
+#tooltip{
+	color: "black";
+	position: absolute;
+	width: auto;
+	height: auto;
+	padding: 15px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+}
+
+#tooltip.hidden{display:none;}
+#chartLabel{position:absolute; top:150px;left:10px;border: none; height:480px; width:120px}
+#barChart{position:absolute; top:150px;left:115px;border: none; height:480px; width:480px}
+#pieChart{
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 480px;
+  height: 480px;
+  border: none;
+  background-color: "grey";
+  position:absolute; top:150px;left:610px;border: none;
+}
+#pieChart>svg{
+  width: 100%;
+  height: 100%;
+}
+#rangeBar{position:absolute; top:150px;left:1100px;border: none; height:480px; width:200px}
+.droplist{
+background-color:"grey"; 
+border:none;
+padding: 20px;
+}
+text{
+color: #ffffff;
+}
+
