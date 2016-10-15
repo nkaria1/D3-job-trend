@@ -4,255 +4,288 @@
         <meta charset="utf-8">
         <title>display</title>
 	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
-
+	<link rel="stylesheet" href="style.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     </head>
     <body>
 	<h1>Job Trends</h1>
 
 	<select id="sel1" class="droplist">
-		<option value="0">State</option>
-		<option value="1">S1</option>
-		<option value="2">S2</option>
-		<option value="3">S3</option>
-		<option value="4">S4</option>
-		<option value="5">S5</option>
+		<option value=505>All States</option>
+		<option value506=>Alabama</option>
+		<option value=519>Alaska</option>
+		<option value=523>Arizona</option>
+		<option value=530>Arkansas</option>
+		<option value=539>California</option>
+		<option value=566>Colorado</option>
+		<option value=586>Columbia</option>
+		<option value=574>Connecticut</option>
+		<option value=583>Delaware</option>
+		<option value=588>Florida</option>
+		<option value=610>Georgia</option>
+		<option value=626>Hawaii</option>
+		<option value=628>Idaho</option>
+		<option value=635>Illinois</option>
+		<option value=648>Indiana</option>
+		<option value=665>Iowa</option>
+		<option value=675>Kansas</option>
+		<option value=682>Kentucky</option>
+		<option value=693>Louisiana</option>
+		<option value=702>Maine</option>
+		<option value=709>Maryland</option>
+		<option value=717>Massachusetts</option>
+		<option value=726>Michigan</option>
+		<option value=742>Minnesota</option>
+		<option value=751>Mississippi</option>
+		<option value=757>Missouri</option>
+		<option value=767>Montana</option>
+		<option value=772>Nebraska</option>
+		<option value=776>Nevada</option>
+		<option value=780>New Hampshire</option>
+		<option value=786>New Jersey</option>
+		<option value=794>New Mexico</option>
+		<option value=799>New York</option>
+		<option value=813>North Carolina</option>
+		<option value=828>North Dakota</option>
+		<option value=832>Ohio</option>
+		<option value=849>Oklahoma</option>
+		<option value=854>Oregon</option>
+		<option value=861>Pennsylvania</option>
+		<option value=878>Rhode Island</option>
+		<option value=881>South Carolina</option>
+		<option value=892>South Dakota</option>
+		<option value=897>Tennessee</option>
+		<option value=908>Texas</option>
+		<option value=934>Utah</option>
+		<option value=940>Vermont</option>
+		<option value=943>Virginia</option>
+		<option value=955>Washington</option>
+		<option value=968>West Virginia</option>
+		<option value=979>Wisconsin</option>
+		<option value=995>Wyoming</option>
+		<option value=998>Guam</option>
+		<option value=999>Puerto Rico</option>
+		<option value=1008>Virgin Islands</option>		
 	</select>	
 	<select id="sel2" class="droplist">
-		<option value="0">MSA</option>
-		<option value="500">Chicago</option>
-		<option value="500">Boston</option>
-		<option value="500">New York</option>
+		<option value=80433>MSA</option>
+		<option class="State_AL" id="509 ">Birmingham Metro Area</option>
+<option class="State_AL" id="515">Huntsville Metro Area</option>
+<option class="State_AL" id="516">Mobile Metro Area</option>
+<option class="State_AL" id="517">Montgomery Metro Area</option>
+<option class="State_AK" id="520">Anchorage Metro Area</option>
+<option class="State_AK" id="522">Juneau Metro Area</option>
+<option class="State_AZ" id="526">Phoenix Metro Area</option>
+<option class="State_AZ" id="528">Tucson Metro Area</option>
+<option class="State_AR" id="531">Fayetteville Metro Area</option>
+<option class="State_AR" id="535">Little Rock Metro Area</option>
+<option class="State_AR" id="536">Memphis Metro Area</option>
+<option class="State_CA" id="540">Bakersfield Metro Area</option>
+<option class="State_CA" id="543">Fresno Metro Area</option>
+<option class="State_CA" id="545">Los Angeles Metro Area</option>
+<option class="State_CA" id="550">Oxnard Metro Area</option>
+<option class="State_CA" id="552">Riverside Metro Area</option>
+<option class="State_CA" id="553">Sacramento Metro Area</option>
+<option class="State_CA" id="554">Salinas Metro Area</option>
+<option class="State_CA" id="555">San Diego Metro Area</option>
+<option class="State_CA" id="556">San Francisco Metro Area</option>
+<option class="State_CA" id="557">San Jose Metro Area</option>
+<option class="State_CA" id="559">Santa Barbara Metro Area</option>
+<option class="State_CA" id="561">Santa Rosa Metro Area</option>
+<option class="State_CO" id="567">Boulder Metro Area</option>
+<option class="State_CO" id="568">Colorado Springs Metro Area</option>
+<option class="State_CO" id="569">Denver Metro Area</option>
+<option class="State_CO" id="570">Fort Collins Metro Area</option>
+<option class="State_CT" id="575">Bridgeport Metro Area</option>
+<option class="State_CT" id="577">Hartford Metro Area</option>
+<option class="State_CT" id="578">New Haven Metro Area</option>
+<option class="State_CT" id="580">Springfield Metro Area</option>
+<option class="State_CT" id="582">Worcester Metro Area</option>
+<option class="State_DE" id="584">Dover Metro Area</option>
+<option class="State_DE" id="585">Philadelphia Metro Area</option>
+<option class="State_DC" id="587">Washington Metro Area</option>
+<option class="State_FL" id="589">Cape Coral Metro Area</option>
+<option class="State_FL" id="592">Gainesville Metro Area</option>
+<option class="State_FL" id="593">Jacksonville Metro Area</option>
+<option class="State_FL" id="595">Miami Metro Area</option>
+<option class="State_FL" id="597">North Port Metro Area</option>
+<option class="State_FL" id="599">Orlando Metro Area</option>
+<option class="State_FL" id="600">Palm Bay Metro Area</option>
+<option class="State_FL" id="608">Tallahassee Metro Area</option>
+<option class="State_FL" id="609">Tampa Metro Area</option>
+<option class="State_GA" id="613">Atlanta Metro Area</option>
+<option class="State_GA" id="614">Augusta Metro Area</option>
+<option class="State_GA" id="616">Chattanooga Metro Area</option>
+<option class="State_GA" id="623">Savannah Metro Area</option>
+<option class="State_HI" id="627">Honolulu Metro Area</option>
+<option class="State_ID" id="629">Boise City Metro Area</option>
+<option class="State_IL" id="639">Chicago Metro Area</option>
+<option class="State_IL" id="641">Davenport Metro Area</option>
+<option class="State_IL" id="644">Peoria Metro Area</option>
+<option class="State_IL" id="646">Springfield Metro Area</option>
+<option class="State_IL" id="647">St. Louis Metro Area</option>
+<option class="State_IN" id="651">Chicago Metro Area</option>
+<option class="State_IN" id="652">Cincinnati Metro Area</option>
+<option class="State_IN" id="656">Fort Wayne Metro Area</option>
+<option class="State_IN" id="657">Indianapolis Metro Area</option>
+<option class="State_IN" id="660">Louisville Metro Area</option>
+<option class="State_IA" id="667">Cedar Rapids Metro Area</option>
+<option class="State_IA" id="668">Council Bluffs Metro Area</option>
+<option class="State_IA" id="669">Davenport Metro Area</option>
+<option class="State_IA" id="670">Des Moines Metro Area</option>
+<option class="State_IA" id="672">Iowa City Metro Area</option>
+<option class="State_KS" id="676">Kansas City Metro Area</option>
+<option class="State_KS" id="680">Topeka Metro Area</option>
+<option class="State_KS" id="681">Wichita Metro Area</option>
+<option class="State_KY" id="684">Cincinnati Metro Area</option>
+<option class="State_KY" id="688">Frankfort Metro Area</option>
+<option class="State_KY" id="690">Lexington Metro Area</option>
+<option class="State_KY" id="691">Louisville Metro Area</option>
+<option class="State_LA" id="695">Baton Rouge Metro Area</option>
+<option class="State_LA" id="700">New Orleans Metro Area</option>
+<option class="State_LA" id="701">Shreveport Metro Area</option>
+<option class="State_ME" id="706">Portland Metro Area</option>
+<option class="State_MD" id="710">Annapolis Metro Area</option>
+<option class="State_MD" id="711">Baltimore Metro Area</option>
+<option class="State_MD" id="714">Philadelphia Metro Area</option>
+<option class="State_MD" id="716">Washington Metro Area</option>
+<option class="State_MA" id="719">Boston Metro Area</option>
+<option class="State_MA" id="723">Providence Metro Area</option>
+<option class="State_MA" id="724">Springfield Metro Area</option>
+<option class="State_MA" id="725">Worcester Metro Area</option>
+<option class="State_MI" id="727">Ann Arbor Metro Area</option>
+<option class="State_MI" id="730">Detroit Metro Area</option>
+<option class="State_MI" id="731">Flint Metro Area</option>
+<option class="State_MI" id="732">Grand Rapids Metro Area</option>
+<option class="State_MI" id="735">Kalamazoo Metro Area</option>
+<option class="State_MI" id="736">Lansing Metro Area</option>
+<option class="State_MN" id="744">Fargo Metro Area</option>
+<option class="State_MN" id="748">Minneapolis Metro Area</option>
+<option class="State_MS" id="754">Jackson Metro Area</option>
+<option class="State_MS" id="755">Memphis Metro Area</option>
+<option class="State_MO" id="760">Fayetteville Metro Area</option>
+<option class="State_MO" id="761">Jefferson City Metro Area</option>
+<option class="State_MO" id="763">Kansas City Metro Area</option>
+<option class="State_MO" id="764">Springfield Metro Area</option>
+<option class="State_MO" id="766">St. Louis Metro Area</option>
+<option class="State_MT" id="768">Billings Metro Area</option>
+<option class="State_NE" id="773">Council Bluffs Metro Area</option>
+<option class="State_NE" id="774">Lincoln Metro Area</option>
+<option class="State_NV" id="778">Las Vegas Metro Area</option>
+<option class="State_NV" id="779">Reno Metro Area</option>
+<option class="State_NH" id="781">Boston Metro Area</option>
+<option class="State_NH" id="782">Concord Metro Area</option>
+<option class="State_NH" id="783">Manchester Metro Area</option>
+<option class="State_NJ" id="787">Allentown Metro Area</option>
+<option class="State_NJ" id="789">New York Metro Area</option>
+<option class="State_NJ" id="791">Philadelphia Metro Area</option>
+<option class="State_NJ" id="792">Trenton Metro Area</option>
+<option class="State_NM" id="795">Albuquerque Metro Area</option>
+<option class="State_NY" id="800">Albany Metro Area</option>
+<option class="State_NY" id="802">Buffalo Metro Area</option>
+<option class="State_NY" id="807">New York Metro Area</option>
+<option class="State_NY" id="808">Poughkeepsie Metro Area</option>
+<option class="State_NY" id="809">Rochester Metro Area</option>
+<option class="State_NY" id="810">Syracuse Metro Area</option>
+<option class="State_NC" id="813">Asheville Metro Area</option>
+<option class="State_NC" id="815">Charlotte Metro Area</option>
+<option class="State_NC" id="816">Durham Metro Area</option>
+<option class="State_NC" id="819">Greensboro Metro Area</option>
+<option class="State_NC" id="823">Raleigh Metro Area</option>
+<option class="State_NC" id="825">Virginia Beach Metro Area</option>
+<option class="State_NC" id="827">Winston Metro Area</option>
+<option class="State_ND" id="830">Fargo Metro Area</option>
+<option class="State_OH" id="833">Akron Metro Area</option>
+<option class="State_OH" id="835">Cincinnati Metro Area</option>
+<option class="State_OH" id="836">Cleveland Metro Area</option>
+<option class="State_OH" id="837">Columbus Metro Area</option>
+<option class="State_OH" id="838">Dayton Metro Area</option>
+<option class="State_OH" id="846">Toledo Metro Area</option>
+<option class="State_OK" id="852">Oklahoma City Metro Area</option>
+<option class="State_OK" id="853">Tulsa Metro Area</option>
+<option class="State_OR" id="857">Eugene Metro Area</option>
+<option class="State_OR" id="859">Portland Metro Area</option>
+<option class="State_OR" id="860">Salem Metro Area</option>
+<option class="State_PA" id="862">Allentown Metro Area</option>
+<option class="State_PA" id="865">Harrisburg Metro Area</option>
+<option class="State_PA" id="867">Lancaster Metro Area</option>
+<option class="State_PA" id="869">New York Metro Area</option>
+<option class="State_PA" id="870">Philadelphia Metro Area</option>
+<option class="State_PA" id="871">Pittsburgh Metro Area</option>
+<option class="State_PA" id="873">Scranton Metro Area</option>
+<option class="State_RI" id="880">Providence Metro Area</option>
+<option class="State_SC" id="883">Augusta Metro Area</option>
+<option class="State_SC" id="884">Charleston Metro Area</option>
+<option class="State_SC" id="885">Charlotte Metro Area</option>
+<option class="State_SC" id="886">Columbia Metro Area</option>
+<option class="State_SC" id="888">Greenville Metro Area</option>
+<option class="State_SD" id="896">Sioux Falls Metro Area</option>
+<option class="State_TN" id="898">Chattanooga Metro Area</option>
+<option class="State_TN" id="904">Knoxville Metro Area</option>
+<option class="State_TN" id="905">Memphis Metro Area</option>
+<option class="State_TN" id="907">Nashville Metro Area</option>
+<option class="State_TX" id="911">Austin Metro Area</option>
+<option class="State_TX" id="916">Dallas Metro Area</option>
+<option class="State_TX" id="917">El Paso Metro Area</option>
+<option class="State_TX" id="918">Houston Metro Area</option>
+<option class="State_TX" id="927">San Antonio Metro Area</option>
+<option class="State_UT" id="937">Provo Metro Area</option>
+<option class="State_UT" id="938">Salt Lake City Metro Area</option>
+<option class="State_VT" id="941">Burlington Metro Area</option>
+<option class="State_VT" id="942">Montpelier Metro Area</option>
+<option class="State_VA" id="950">Richmond Metro Area</option>
+<option class="State_VA" id="952">Virginia Beach Metro Area</option>
+<option class="State_VA" id="953">Washington Metro Area</option>
+<option class="State_WA" id="962">Olympia Metro Area</option>
+<option class="State_WA" id="963">Portland Metro Area</option>
+<option class="State_WA" id="964">Seattle Metro Area</option>
+<option class="State_WA" id="965">Spokane Metro Area</option>
+<option class="State_WV" id="969">Charleston Metro Area</option>
+<option class="State_WV" id="976">Washington Metro Area</option>
+<option class="State_WI" id="981">Chicago Metro Area</option>
+<option class="State_WI" id="985">Green Bay Metro Area</option>
+<option class="State_WI" id="988">Madison Metro Area</option>
+<option class="State_WI" id="989">Milwaukee Metro Area</option>
+<option class="State_WI" id="990">Minneapolis Metro Area</option>
+<option class="State_WY" id="997">Cheyenne Metro Area</option>
+<option class="State_PR" id="1006">San Juan Metro Area</option>
+<option class="State_AL" id="1135">Columbus Metro Area</option>
+<option class="State_CA" id="1136">Modesto Metro Area</option>
+<option class="State_CA" id="1137">Santa Cruz Metro Area</option>
+<option class="State_CA" id="1138">Stockton Metro Area</option>
+<option class="State_CA" id="1139">Vallejo Metro Area</option>
+<option class="State_CO" id="1140">Greeley Metro Area</option>
+<option class="State_FL" id="1141">Deltona Metro Area</option>
+<option class="State_FL" id="1142">Lakeland Metro Area</option>
+<option class="State_FL" id="1143">Pensacola Metro Area</option>
+<option class="State_GA" id="1144">Columbus Metro Area</option>
+<option class="State_GA" id="1145">Macon Metro Area</option>
+<option class="State_IL" id="1146">Bloomington Metro Area</option>
+<option class="State_IL" id="1147">Champaign Metro Area</option>
+<option class="State_IL" id="1148">Rockford Metro Area</option>
+<option class="State_IN" id="1149">Evansville Metro Area</option>
 	</select>	
-	<select id="sel3" onchange="dont_echo()" class="droplist">
+	<select id="sel3"  class="droplist">
 		<option value="0">Career Area</option>
 		<option value="20">Information Technology</option>
 		<option value="10">Health Care</option>
 		<option value="5">Arts</option>
 	</select>	
-	</br></br>
-
-<script type="text/javascript">
-	
-	function echo(){
-        alert("Hello "+document.getElementById("sel3").value);
-            }
-	function dont_echo(){}
-	// Your beautiful D3 code will go here
-
-	var h=400;
-	var w=400;
-	var padding=20;
-	var dataset=[0,1,2,3,4,5,6,7,9];
-/*	var dataset = [ 
-		[11,"marketing"],
-		[2,"finance"],
-		[9,"infrastructure"],
-		[5,"construction"], 
-		[10,"transport"], 
-		[15,"information technology"], 
-		[20,"arts"],
-		[9,"liturature"],
-		[22,"legal"], 
-		[25,"medical" ] 
-		];
-*/
-	var xScale = d3.scale.linear()
-                        .domain([0, d3.max(dataset,function(d){return(d);})])
-                        .range([padding, w-padding]);
-	var xWidthScale = d3.scale.linear()
-                        .domain([0, d3.max(dataset,function(d){return(d);})])
-                        .range([0, w-padding-padding]);
-
-	var xAxis = d3.svg.axis().scale(xScale)
-			.orient("bottom").ticks(5);
-	var yScale = d3.scale.ordinal()
-                .domain(d3.range(dataset.length))
-                .rangeRoundBands([ h-padding,padding], 0.1);
-	var yAxis = d3.svg.axis().scale(yScale)
-			.orient("left")
-		//	.tickFormat(function(d){return(d);})
-			;
-	
-	var svg=d3.select("body")
-		.append("svg")
-		.attr({ height: h,
-			width: w
-			});
-	svg.append("g").call(xAxis).attr("class","axis").attr("id", "xaxis").attr("transform", "translate(0,"+(h-padding)+")");
-	svg.append("g").call(yAxis).attr("class","axis").attr("id", "yaxis").attr("transform", "translate("+padding+",0)");
-	
-	var rects=svg.selectAll("rect")
-	   .data(dataset)
-	   .enter()
-	   .append("rect");
-
-
-	var rec_attr={	
-		y: function(d, i) { return yScale(i);},
-		x: padding +2,
-		height: yScale.rangeBand(),
-		width: function(d) { return xWidthScale(d); },
-		fill: "blue"
-	   };
-
-	rects.attr(rec_attr);
-	
-/* 
-	var texts=svg.selectAll("text")
-	   .data(dataset)
-	   .enter()
-	   .append("text")
-	   .text(function(d) {return d;});
-	var text_attr={	
-		x: function(d) { return xScale(d)-20; },
-		y: function(d,i) { return yScale(i)+yScale.rangeBand()/2;},
-	   	"text-anchor": "middle",
-		//width: w / dataset.length - barPadding,
-		//height: function(d) { return d * 4; },
-		fill: "pink" 
-	   };
-	texts.attr(text_attr);
-*/	
-
-
-//////////////////////////////////       Part 2       ////////////////////
-
-var diameter = 500, //max size of the bubbles
-    color    = d3.scale.category20c(); //color category
-
-var bubble = d3.layout.pack()
-    .sort(null)
-    .size([diameter, diameter])
-    .padding(1.5);
-
-var svg2 = d3.select("body")
-    .append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
-
-d3.csv("fruit.csv", function(error, data){
-
-    //convert numerical values from strings to numbers
-    data = data.map(function(d){ d.value = +d["Amount"]; return d; });
-
-    //bubbles needs very specific format, convert data to this.
-    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
-
-    //setup the chart
-    var bubbles = svg2.append("g")
-        .attr("transform", "translate(0,0)")
-        .selectAll(".bubble")
-        .data(nodes)
-        .enter();
-
-    //create the bubbles
-    bubbles.append("circle")
-        .attr("r", function(d){ return d.r; })
-        .attr("cx", function(d){ return d.x; })
-        .attr("cy", function(d){ return d.y; })
-        .style("fill", function(d) { return color(d.value); });
-
-    //format the text for each bubble
-    bubbles.append("text")
-        .attr("x", function(d){ return d.x; })
-        .attr("y", function(d){ return d.y + 5; })
-        .attr("text-anchor", "middle")
-        .text(function(d){ return d["Fruit"]; })
-        .style({
-            "fill":"white", 
-            "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-            "font-size": "12px"
-        });
-})       
-
-
-/////////////////////////      Update data      /////////////////////
-
-
-	d3.select("#sel3").on("change",function() { 
-		var newdata=[];
-		var anum=parseInt(document.getElementById("sel3").value);
-		var speed=parseInt(document.getElementById("sel2").value);
-	//	alert("Hello "+anum);
-		for (var i=0;i<9;i++){
-			newdata.push(Math.ceil(Math.random()*500));
-			}
-		//newdata=[anum,2*anum,5*anum,3*anum,anum,2*anum,2*anum,anum,3*anum,anum]; //update
-		var xScale = d3.scale.linear()
-		.domain([0, d3.max(newdata,function(d){return(d);})])
-		.range([padding, w-padding]);
-		var xWidthScale = d3.scale.linear()
-		.domain([0, d3.max(newdata,function(d){return(d);})])
-		.range([0, w-padding-padding]);
-		var yScale = d3.scale.ordinal()
-		.domain(d3.range(newdata.length))
-		.rangeRoundBands([ h-padding,padding], 0.2);
-
-		var bars = svg.selectAll("rect").data(newdata);
-		bars.enter()
-		    .append("rect")
-		    .attr({
-			x:padding,
-			y:h,
-			height:yScale.rangeBand(),
-			width: function(d){return xWidthScale(d);},
-			fill: "blue" 
-			});
-
-		    bars.transition().duration(speed) //rebind	
-			.attr({  
-				y: function(d, i) { return yScale(i);},
-				x: padding +2,
-				height: yScale.rangeBand(),
-				width: function(d) { return xWidthScale(d); },
-				fill: "blue"
-			});
-		
-		svg.select("#xaxis").transition().duration(speed);
-		svg.select("#yaxis").transition().duration(speed);
-
-		d3.csv("skills.csv", function(error, data){
-		    //convert numerical values from strings to numbers
-		    data = data.map(function(d){ d.value = +d["Amount"]; return d; });
-		    //bubbles needs very specific format, convert data to this.
-		    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
-
-		    //setup the chart 
-		    var bubbles = svg2.append("g")
-			.attr("transform", "translate(0,0)")
-			.selectAll(".bubble")
-			.data(nodes)
-			.transition();
-
-
-		    //create the bubbles
-		    bubbles.append("circle")
-			.attr("r", function(d){ return d.r; })
-			.attr("cx", function(d){ return d.x; })
-			.attr("cy", function(d){ return d.y; })
-			.style("fill", function(d) { return color(d.value); });
-
-		    //format the text for each bubble
-		    bubbles.append("text")
-			.attr("x", function(d){ return d.x; })
-			.attr("y", function(d){ return d.y + 5; })
-			.attr("text-anchor", "middle")
-			.text(function(d){ return d["Fruit"]; })
-			.style({
-			    "fill":"white",
-			    "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-			    "font-size": "12px"
-			});
-		}) // end of csv function
-
-
-
-
-		}); // end of on change function
-
-</script>
-<input type="range" id="slider1" step="25">
+<button>Fire</button>
+	<br></br>
+<div id="chartLabel"></div>
+<div id="barChart"></div>
+<div id="pieChart"></div>
+<div id="tooltip" class="hidden">
+<p>This is tool tip</p>
+<p id="value">100</p>
+</div>
+<div id="rangeBar">
+<br></br><input type="range" id="slider1" step="25"><br></br>
+<input type="range" id="slider1" step="25"><br></br>
+<input type="range" id="slider1" step="25"><br></br>
+</div>
+<script type="text/javascript " src="draw.js"></script>
     </body>
 </html>
 
